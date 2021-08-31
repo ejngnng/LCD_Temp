@@ -10,10 +10,17 @@
 
 #include "display/lcd1602.h"
 
+#define ButtonPin 2
+
 extern LiquidCrystal LCD1602;
+
+// function declare
+void gpio_setup();
+void button_isr();
 
 
 void setup(){
+  gpio_setup();
   lcd1602_init();
 }
 
@@ -26,3 +33,16 @@ void loop(){
   printNumber(5, 12);
 
 }
+
+
+void gpio_setup() {
+  pinMode(ButtonPin, INPUT_PULLUP);
+
+  attachInterrupt(digitalPinToInterrupt(ButtonPin), button_isr, LOW);
+
+}
+
+void button_isr() {
+
+
+} 
